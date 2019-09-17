@@ -45,7 +45,7 @@ $accessTokenSecret = "XXXX";
             fwrite($fp1, "$blockNumber");
             fclose($fp1);
 		
-	          $start3 = mb_strpos($alis,'from":"')+7;
+	    $start3 = mb_strpos($alis,'from":"')+7;
             $end3 = mb_strpos($alis,'","contractAddress"');
             $from = mb_substr($alis, $start3, $end3-$start3);
             if (strcasecmp("$from", "$ce") == 0 ){
@@ -53,7 +53,7 @@ $accessTokenSecret = "XXXX";
             } else {
             $from1 = "from："."$from"."\n";
 	          }
-	          $start4 = mb_strpos($alis,'","to":"0')+8;
+	    $start4 = mb_strpos($alis,'","to":"0')+8;
             $end4 = mb_strpos($alis,'","value"');
             $to = mb_substr($alis, $start4, $end4-$start4);
             if (strcasecmp("$to", "$ce") == 0 ){
@@ -61,6 +61,6 @@ $accessTokenSecret = "XXXX";
             } else {
             $to1 = "to："."$to"."\n"."\n";
             }
-	          $twitter = new TwistOAuth($consumerKey, $consumerSecret, $accessToken, $accessTokenSecret);
+	    $twitter = new TwistOAuth($consumerKey, $consumerSecret, $accessToken, $accessTokenSecret);
             $result = $twitter->post("statuses/update", ["status" => "$title"."$time"."$val"."$from1"."$to1"."＃ALIS"]);
     }	
