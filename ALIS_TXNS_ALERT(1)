@@ -76,7 +76,7 @@ if ($status1 == 1){
 
 $fp2 = fopen("blockNumber_ALIS.txt", "r");
 $block2 = fgets($fp2);
-fclose($fp2)
+fclose($fp2);
 
 $url2 = "https://api.etherscan.io/api?module=account&action=tokentx&contractaddress=".$contract."&address=".$alis_ad."&startblock=".$block2."&endblock=9999999&sort=asc&apikey=".$apikey;
 
