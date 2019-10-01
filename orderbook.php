@@ -16,7 +16,7 @@ $context = stream_context_create(["http" => ["ignore_errors" => true,"timeout" =
 
 $orderbook = file_get_contents($url, false, $context);
 
-date_default_timezone_set('Asia/Tokyo');
+date_default_timezone_set('UTC');
 $date = [date("Y-m-d H:i",strtotime("-2 minute")),date("Y-m-d H:i",strtotime("-1 minute")),date("Y-m-d H:i")];
 
 for($d = 0 ; $d < 3; $d++){
@@ -50,7 +50,7 @@ for($d = 0 ; $d < 3; $d++){
         $tweet= $type_tweet."\n".
                 "Price:".$price."\n".
                 "Volume:".number_format((int)$quantity)." ALIS"."\n".
-                "[".$date[$d]."]";
+                "[".$date[$d]."(UTC)"."]";
 
         // Tweet実行
         $twitter = new TwistOAuth($consumerKey, $consumerSecret, $accessToken, $accessTokenSecret);
