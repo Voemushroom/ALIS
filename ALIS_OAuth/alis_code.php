@@ -33,9 +33,6 @@ curl_setopt($curl, CURLOPT_HTTP_VERSION, CURL_HTTP_VERSION_1_1);
 $result = curl_exec($curl);
 curl_close($curl);
 
-//echo $result."<br>"."<br>";
-
-
 //アクセスtoken抽出
 $end = strpos($result,"refresh_token")-4;
 $access_token = substr($result,18, $end-18);
@@ -45,7 +42,6 @@ $_SESSION["token"] = $access_token;
 $url3 = "http://voemushroom.com/alis-tool/";
 header("Location: ".$url3);
 exit();
-
 
 ?>
 
