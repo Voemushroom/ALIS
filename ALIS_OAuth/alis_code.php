@@ -36,7 +36,6 @@ curl_close($curl);
 //アクセスtoken抽出
 $end = strpos($result,"refresh_token")-4;
 $access_token = substr($result,18, $end-18);
-//setcookie("token", $access_token , time()+60*3);
 $_SESSION["token"] = $access_token;
 
 $url3 = "http://voemushroom.com/alis-tool/";
