@@ -38,6 +38,7 @@ $end = strpos($result,"refresh_token")-4;
 $access_token = substr($result,18, $end-18);
 $_SESSION["token"] = $access_token;
 
+//自サイトへ戻る
 $url3 = "http://voemushroom.com/alis-tool/";
 header("Location: ".$url3);
 exit();
