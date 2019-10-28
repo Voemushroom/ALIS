@@ -1,8 +1,6 @@
 <?php
 
 set_time_limit(120);
-ini_set("display_errors", 1);
-error_reporting(E_ALL);
 
 if (is_uploaded_file($_FILES["csvfile"]["tmp_name"])) {
   $file_tmp_name = $_FILES["csvfile"]["tmp_name"];
@@ -36,11 +34,8 @@ if (is_uploaded_file($_FILES["csvfile"]["tmp_name"])) {
 }
 
 
-//var_dump($asins);
-
 $end = 0;
 $count  = count($asins);
-//$count  = 50;
 $space  = " ";
 $kanma = ",";
 
