@@ -12,8 +12,8 @@ if (is_uploaded_file($_FILES["csvfile"]["tmp_name"])) {
     echo $err_msg;
   } else {
     //ファイルをdataディレクトリに移動
-    if (move_uploaded_file($file_tmp_name, "/home/bluebadger8/www/wp/uploaded/" . $file_name)) {
-      $file = '/home/bluebadger8/www/wp/uploaded/'.$file_name;
+    if (move_uploaded_file($file_tmp_name, "/home/xxxxx/www/wp/uploaded/" . $file_name)) {
+      $file = '/home/xxxxx/www/wp/uploaded/'.$file_name;
       $fp   = fopen($file, "r");
 
       //配列に変換する
@@ -22,7 +22,7 @@ if (is_uploaded_file($_FILES["csvfile"]["tmp_name"])) {
       }
       fclose($fp);
       //ファイルの削除
-      unlink('/home/bluebadger8/www/wp/uploaded/'.$file_name);
+      unlink('/home/xxxxx/www/wp/uploaded/'.$file_name);
     } else {
       $err_msg = "ファイルをアップロードできません。";
       echo $err_msg;
