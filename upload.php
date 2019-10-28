@@ -33,7 +33,7 @@ if (is_uploaded_file($_FILES["csvfile"]["tmp_name"])) {
   echo $err_msg;
 }
 
-
+//初期値セット
 $end = 0;
 $count  = count($asins);
 $space  = " ";
@@ -67,7 +67,7 @@ $count_pool = 0;
 $total_pool = 0;
 $yen_pool = 0;
 
-
+//集計
 for($i = 0; $i < $count; $i++){
 if(strpos($asins[$i][0],"19/") == 0){
     continue;
@@ -103,7 +103,8 @@ if(strpos($asins[$i][0],"19/") == 0){
     $alis = round($price2 * $asins[$i][3] , 2);
     
     echo $date."[".$asins[$i][2]."]" .$asins[$i][3] ." ALIS(".$alis."円)@".$price2."<br>";
-    
+   
+    //条件により分岐
     if ( strcmp($asins[$i][2], "deposit") == 0 ) {
         $count_deposit ++;
         $total_deposit += $asins[$i][3];
@@ -135,6 +136,7 @@ if(strpos($asins[$i][0],"19/") == 0){
      }    
 }
 
+//収支計算
 $income   = $total_deposit + $total_user + $total_like;
 $yen_income   = $yen_deposit + $yen_user + $yen_like;
 $expense = $total_withdraw +$total_give + $total_burn + $total_pool;
@@ -142,6 +144,7 @@ $yen_expense = $yen_withdraw +$yen_give + $yen_burn + $yen_pool;
 $balance = $income - $expense;
 $yen_balance = $yen_income - $yen_expense;
 
+//結果出力
 echo "==================================="."<br>";
 echo "Total Deposit ：" .$total_deposit. " ALIS(".$yen_deposit."円)"." [".$count_deposit."件]"."<br>";
 echo "Total Get from user ：" .$total_user. " ALIS(".$yen_user."円)"." [".$count_user."件]"."<br>";
