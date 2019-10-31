@@ -32,7 +32,7 @@ $total_purchased     =0;
 $start = 0;
 $context = stream_context_create(["http" => ["ignore_errors" => true,"timeout" => 3]]);
 
-for($j = 0; $j < 10; $j++){
+for($j = 0; $j < 100; $j++){
     for($i = 0; $i < 100; $i++){
     if(strpos($result,"purchased",$start) == 0){
         break;
