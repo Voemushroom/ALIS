@@ -1,15 +1,11 @@
 <?php
 
-ini_set("display_errors", 1);
-error_reporting(E_ALL);
-
 //別で取得したaccess_tokenとarticle_idをセット
 session_start();
 $access_token = $_SESSION["token"];
 $article_id = $_POST["name"];
 
-// 叩くAPIをset
-//$url = "https://alis.to/oauth2api/me/info";
+// 通知一覧を取得
 $url = "https://alis.to/oauth2api/me/notifications?limit=100";
 $headers = array("Authorization: {$access_token}","Content-Type: application/json; charset=utf-8");
 
@@ -21,7 +17,7 @@ curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
 
 $result = curl_exec($curl);
 curl_close($curl);
-//echo $result."<br>"."<br>";
+
 
 //user_id取得
 $kanma = ",";
@@ -54,10 +50,12 @@ for($j = 0; $j < 10; $j++){
     $end1  = strpos($result,$kanma, $start1)-1;
     $id2  = substr($result, $start1, $end1 - $start1);
     
+    //入力された記事なら実行
     if ( strcmp($article_id, $id2) == 0 ) {
         $url3 = "https://alis.to/api/users/".$user_id."/info";
         $file    = file_get_contents($url3, false, $context);
         
+        //アイコンのurlを取得
         if(strpos($file,"icon_image_url") !== false){
             $start1 = strpos($file,"icon_image_url")+18;  
             $end1  = strpos($file,"}", $start1)-1;
@@ -102,6 +100,7 @@ for($j = 0; $j < 10; $j++){
     }
 }
 
+//出力
 $a = count($output);
 echo "<h2>購入者合計：".$a."人"."</h2><br>";
 
