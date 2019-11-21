@@ -1,11 +1,8 @@
 <?php
 
 set_time_limit(300);
-ini_set("display_errors", 1);
-error_reporting(E_ALL);
 
 $context = stream_context_create(["http" => ["ignore_errors" => true,"timeout" => 100]]);
-
 
 //いろいろデーターをセット
 $start = 0;
@@ -21,7 +18,6 @@ for($j = 1; $j < 500; $j++){
     $urls[] = "https://alis.to/api/articles/recent?limit=100&page=".$j;
 }  
   
-
 //マルチハンドル初期化
 $mh = curl_multi_init();
 
@@ -53,9 +49,7 @@ foreach ($ch_array as $ch) {
 	$file = curl_multi_getcontent($ch);
         usleep(50000);
         
-
 	//ここから$fileを好きにする
-
         if(strpos($file,"article_id",$start) == false){
             curl_close($ch);
             $gets = 1;
@@ -133,13 +127,12 @@ foreach ($ch_array as $ch) {
 
         $start= 0;
         $count ++;
-        $number += 100;
-        echo $number."件目完了"."<br>"."<br>";
         
         if($gets !== 1){
 	    curl_multi_remove_handle($mh, $ch);
 	    curl_close($ch);
         }
+	
         $gets = 0;
         $file = 0;
         
@@ -149,8 +142,3 @@ foreach ($ch_array as $ch) {
 curl_multi_close($mh);
 
 file_put_contents("/home/bluebadger8/www/wp/ranking.dat",serialize($output));
-
-
-
-
-
