@@ -1,8 +1,6 @@
 <?php
 
 set_time_limit(300);
-ini_set("display_errors", 1);
-error_reporting(E_ALL);
 
 $date1    = $_POST["date1"];
 $date2    = $_POST["date2"];
@@ -19,10 +17,8 @@ if($date2 == null){
 $date_start = date('Ymd',  strtotime($date1));
 $date_end   = date('Ymd',  strtotime($date2));
 
-
 $context = stream_context_create(["http" => ["ignore_errors" => true,"timeout" => 100]]);
 $file    = file_get_contents("ranking.dat");
-
 
 //いろいろデーターをセット
 $end    = 0;
@@ -31,7 +27,6 @@ $kigo   = "\"";
 $number = 0;
 
 $sum   = substr($file, 2, 5);
-//echo $sum."<br>";
 
 for($j = 0; $j < $sum; $j++){   
      
@@ -69,14 +64,12 @@ for($j = 0; $j < $sum; $j++){
         //likesを取得
         $end1  = strpos($like,"}");
         $likes = substr($like,10, $end1 - 10);
-        //echo "$id,$user,$time,$topic,$title,$likes"."<br>";
-
+        
         $arr[] = [$likes,$id,$user,$time,$topic,$title];
 
     }  
     
 }
-
 
 rsort($arr);
 $count = count($arr);
@@ -90,6 +83,7 @@ $count = count($arr);
 <title>ランキング結果🍄</title>
 </head>
 <body>
+    
 <h2><?php echo $date_start." ～ ".$date_end." のいいねランキング結果🍄"; ?></h2>
 <h3>対象記事件数(<?= $count; ?>)</h3>
 
@@ -110,8 +104,3 @@ for($q = 0; $q < 10; $q++){
 
 </body>
 </html>
-
-
-
-
-
